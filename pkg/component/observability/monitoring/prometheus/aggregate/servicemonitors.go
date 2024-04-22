@@ -15,6 +15,7 @@ import (
 )
 
 // CentralServiceMonitors returns the central ServiceMonitor resources for the aggregate prometheus.
+// TODO: @renormalize ServiceMonitor is unnecessary for the etcd-druid job that is already being scraped by the cache prometheus
 func CentralServiceMonitors() []*monitoringv1.ServiceMonitor {
 	return []*monitoringv1.ServiceMonitor{
 		{

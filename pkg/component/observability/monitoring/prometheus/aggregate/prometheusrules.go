@@ -67,6 +67,51 @@ func CentralPrometheusRules() []*monitoringv1.PrometheusRule {
 								"summary":     "A node is not healthy.",
 							},
 						},
+						// TODO: @renormalize remove NotEnoughCompactionJobsFailing, this is just for tests
+						{
+							Alert: "NotEnoughCompactionJobsFailing",
+							Expr:  intstr.FromString(`etcddruid_compaction_jobs_total{succeeded="true"} > 0`),
+							For:   ptr.To(monitoringv1.Duration("10m")),
+							Labels: map[string]string{
+								"severity":   "warning",
+								"type":       "seed",
+								"visibility": "operator",
+							},
+							Annotations: map[string]string{
+								"description": "Seed {{$labels.pod}} does not have enough compaction jobs failing.",
+								"summary":     "Not enough compaction jobs are failing in the seed",
+							},
+						},
+						// TODO: @renormalize rules to set up alerts for compaction jobs failing
+						{
+							Alert: "TooManyCompactionJobsFailingTest",
+							Expr:  intstr.FromString(`etcddruid_compaction_jobs_total{succeeded="false"} > 0`),
+							For:   ptr.To(monitoringv1.Duration("10m")),
+							Labels: map[string]string{
+								"severity":   "warning",
+								"type":       "seed",
+								"visibility": "operator",
+							},
+							Annotations: map[string]string{
+								"description": "Seed {{$labels.pod}} has too many compaction jobs failing.",
+								"summary":     "Too many compaction jobs are failing in the seed",
+							},
+						},
+						// TODO: @renormalize rules to set up alerts for compaction jobs failing
+						{
+							Alert: "TooManyCompactionJobsFailing",
+							Expr:  intstr.FromString(`(count(etcddruid_compaction_jobs_total{succeeded="false"}) / count(etcddruid_compaction_jobs_total)) > 0.1`),
+							For:   ptr.To(monitoringv1.Duration("10m")),
+							Labels: map[string]string{
+								"severity":   "warning",
+								"type":       "seed",
+								"visibility": "operator",
+							},
+							Annotations: map[string]string{
+								"description": "Seed {{$labels.pod}} has too many compaction jobs failing.",
+								"summary":     "Too many compaction jobs are failing in the seed",
+							},
+						},
 					},
 				}},
 			},
