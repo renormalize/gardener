@@ -59,6 +59,20 @@ var _ = Describe("PrometheusRules", func() {
 										"summary":     "A node is not healthy.",
 									},
 								},
+								{
+									Alert: "TooManyCompactionJobsFailing",
+									Expr:  intstr.FromString(`(count(etcddruid_compaction_jobs_total{succeeded="false"}) / count(etcddruid_compaction_jobs_total)) > 0.1`),
+									For:   ptr.To(monitoringv1.Duration("10m")),
+									Labels: map[string]string{
+										"severity":   "warning",
+										"type":       "seed",
+										"visibility": "operator",
+									},
+									Annotations: map[string]string{
+										"description": "Seed {{$labels.pod}} has too many compaction jobs failing.",
+										"summary":     "Too many compaction jobs are failing in the seed",
+									},
+								},
 							},
 						}},
 					},
