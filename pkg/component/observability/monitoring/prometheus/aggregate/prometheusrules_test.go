@@ -61,7 +61,7 @@ var _ = Describe("PrometheusRules", func() {
 								},
 								{
 									Alert: "TooManyCompactionJobsFailing",
-									Expr:  intstr.FromString(`(count_over_time(etcddruid_compaction_jobs_total{succeeded="false"})[1h] / count_over_time(etcddruid_compaction_jobs_total))[1h] > 0.1`),
+									Expr:  intstr.FromString(`count(increase(etcddruid_compaction_jobs_total{succeeded="false"}[1h])) / count(increase(etcddruid_compaction_jobs_total[1h]))`),
 									For:   ptr.To(monitoringv1.Duration("10m")),
 									Labels: map[string]string{
 										"severity":   "warning",

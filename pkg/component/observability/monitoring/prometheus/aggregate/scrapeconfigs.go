@@ -17,8 +17,6 @@ import (
 )
 
 // CentralScrapeConfigs returns the central ScrapeConfig resources for the aggregate prometheus.
-// TODO: @renormalize add a match here for the etcd-druid job in the cache prometheus
-// TODO: @renormalize add tests for this
 func CentralScrapeConfigs() []*monitoringv1alpha1.ScrapeConfig {
 	return []*monitoringv1alpha1.ScrapeConfig{
 		{
