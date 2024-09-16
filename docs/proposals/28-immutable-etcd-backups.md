@@ -1,13 +1,15 @@
 ---
-title: 28: Immutable ETCD Backups
-gep-number: 28
-creation-date: 2024-09-12
+title: Add Optional Bastion Section To CloudProfile
+gep-number: 27
+creation-date: 2024-05-08
 status: implementable
 authors:
-- "@seshachalam-yv"
-- "@renormalize"
+- "@hebelsan"
+- "@kon-angelo"
+- "@AndreasBurger"
 reviewers:
-- "@unmarshall"
+- "@rfranzke"
+- "@timuthy"
 ---
 
 # GEP-28: Immutable ETCD Backups
