@@ -5,8 +5,9 @@ creation-date: 2024-09-12
 status: implementable
 authors:
 - "@seshachalam-yv"
+- "@renormalize"
 reviewers:
-- "@reviewer"
+- "@unmarshall"
 ---
 
 # GEP-28: Immutable ETCD Backups
