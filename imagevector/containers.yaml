@@ -67,8 +67,8 @@ images:
         interacted with from other containers or other systems
 - name: etcd-druid
   sourceRepository: github.com/gardener/etcd-druid
-  repository: europe-docker.pkg.dev/gardener-project/releases/gardener/etcd-druid
-  tag: "v0.28.0"
+  repository: europe-docker.pkg.dev/gardener-project/snapshots/gardener/etcd-druid
+  tag: "v0.29.0-dev-48ecf9b109e906a29549147ff49cd4794888bf6a-linux-amd64"
 - name: etcd
   sourceRepository: github.com/etcd-io/etcd
   repository: quay.io/coreos/etcd
