@@ -117,8 +117,12 @@ func (b *Botanist) DeployEtcd(ctx context.Context) error {
 			deltaSnapshotRetentionPeriod = b.Config.ETCDConfig.DeltaSnapshotRetentionPeriod
 		}
 
+		// Buckets in "special" regions need to be explicitly passed to ensure the correct endpoint is used by the etcd-backup-restore sidecar.
+		region := ptr.Deref(backupConfig.Region, b.Seed.GetInfo().Spec.Provider.Region)
+
 		b.Shoot.Components.ControlPlane.EtcdMain.SetBackupConfig(&etcd.BackupConfig{
 			Provider:                     backupConfig.Provider,
+			Region:                       region,
 			SecretRefName:                v1beta1constants.BackupSecretName,
 			Prefix:                       b.Shoot.BackupEntryName,
 			Container:                    string(secret.Data[v1beta1constants.DataKeyBackupBucketName]),

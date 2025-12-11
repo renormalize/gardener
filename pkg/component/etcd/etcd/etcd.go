@@ -169,6 +169,8 @@ type Values struct {
 type BackupConfig struct {
 	// Provider is the name of the infrastructure provider for the blob storage bucket.
 	Provider string
+	// Region is the name of the infrastructure provider region of the storage bucket.
+	Region string
 	// Container is the name of the blob storage bucket.
 	Container string
 	// SecretRefName is the name of a Secret object containing the credentials of the selected infrastructure provider.
